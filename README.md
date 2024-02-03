@@ -42,7 +42,7 @@ enum LabelName : byte // Casting 'any' byte to this enum instantly maps the bits
 ___
 ##### BackColor attribute
 
-In this case, we've made a simple custom attribute named `BackColor` to easily specify the background color that should be applied to the label when the flag is set. This is optional of course.
+In this case, we've made a simple custom attribute named `BackColor` to easily specify the background color that should be applied to the label when the flag is set. (This is optional.)
 
 ```
 sealed class BackColorAttribute : Attribute
@@ -105,4 +105,4 @@ public partial class MainForm : Form
 ```
 
 
-  [1]: https://i.stack.imgur.com/IFVvo.png
+  [1]: https://i.stack.imgur.com/bfJs1.png
