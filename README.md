@@ -55,7 +55,7 @@ ___
 
 ##### Example
 
-If the enumeration name is _also_ an exact match for the `Label` name on the form, you can use it to retrieve the `Control` using `tableLayoutPanel.Controls[name.ToString()]`. Here's a simple form that brings all the elements together.
+If the enumeration name is _also_ an exact match for the `Label.Name` property on the form, you can use it to retrieve the label control using the string indexer of the `Controls` collection that contains the labels. (For example `tableLayoutPanel.Controls[name]`). Here's a simple form that brings all the elements together.
 
 ```csharp
 public partial class MainForm : Form
