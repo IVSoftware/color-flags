@@ -1,1 +1,103 @@
-# color-flags
+## Use enum to map color flags.
+
+In your code the call to `serial.ReadExisting()` returns a byte where the bits describe whether to use a custom `BackColor` for what might be inferred to be `Label` controls on the form. One approach is to set up an `enum` that can be cast _directly_ as `LabelName flags = (LabelName)serial.ReadExisting()`.
+
+[![example][1]][1]
+
+```csharp
+[Flags]
+enum LabelName : byte
+{
+    [BackColor("Red")]
+    lblV10 = 0x01,
+
+    [BackColor("Orange")]
+    lblV50 = 0x02,
+
+    [BackColor("Green")]
+    lblV90 = 0x04,
+
+    [BackColor("Green")]
+    lblVBak = 0x08,
+
+    [BackColor("Red")]
+    lblW10 = 0x10,
+
+    [BackColor("Orange")]
+    lblW50 = 0x20,
+
+    [BackColor("Green")]
+    lblW90 = 0x40,
+
+    [BackColor("Green")]
+    lblWbak = 0x80,
+}
+```
+
+___
+##### BackColor attribute
+
+In this case, we've made a simple custom attribute named `BackColor` to easily specify the background color that should be applied to the label when the flag is set. This is optional of course.
+
+```
+sealed class BackColorAttribute : Attribute
+{
+    public BackColorAttribute(string color) => Value = Color.FromName(color);
+    public Color Value { get; }
+}
+```
+##### Example
+
+If the enumeration name is _also_ an exact match for the `Label` name on the form, you can use it to retrieve the `Control` using `tableLayoutPanel.Controls[name.ToString()]`. Here's a simple form that brings all the elements together.
+
+```csharp
+public partial class MainForm : Form
+{
+    public MainForm()
+    {
+        InitializeComponent();
+        buttonReadExisting.Click += (sender, e) =>
+        {
+            // Generate sim data byte
+            byte data = MockReadExisting();
+            labelByte.Text = $"0x{data:X2}";
+
+            foreach (LabelName name in Enum.GetValues(typeof(LabelName)))
+            {
+                if (tableLayoutPanel.Controls[$"{name}"] is Label label)
+                {
+                    if (((LabelName)data).HasFlag(name))
+                    {
+                        if(
+                            typeof(LabelName)
+                            .GetMember($"{name}")
+                            .FirstOrDefault()?
+                            .GetCustomAttribute(typeof(BackColorAttribute))
+                            is
+                            BackColorAttribute attr)
+                        {
+                            label.BackColor = attr.Value;
+                        }
+                        else label.BackColor = Color.Maroon; // Fallback
+                    }
+                    else label.BackColor = Color.Black;
+                }
+            }
+        };
+    }
+```
+##### Simulate the received byte (sequentially or randomly)
+```
+    bool UseRandom { get; set; } = true;
+    int count = 1;
+    private byte MockReadExisting()
+    {
+        if(UseRandom) return Convert.ToByte(_rando.Next(0x100));
+        else return Convert.ToByte(((count++) % 0xFF));
+    }
+    Random _rando = new Random(2);
+}
+```
+
+
+  [1]: https://i.stack.imgur.com/IFVvo.png
