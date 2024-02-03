@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace color_flags
 {
-    sealed class BackColorAttribute : Attribute
+    sealed class SetColorAttribute : Attribute
     {
-        public BackColorAttribute(string color) => Value = Color.FromName(color);
+        public SetColorAttribute(string color) => Value = Color.FromName(color);
         public Color Value { get; }
     }
 
@@ -16,28 +16,28 @@ namespace color_flags
     [Flags]
     enum LabelName : byte // Casting 'any' byte to this enum instantly maps the bits. 
     {
-        [BackColor("Red")]
+        [SetColor("Red")]
         lblV10 = 0x01,
 
-        [BackColor("Orange")]
+        [SetColor("Orange")]
         lblV50 = 0x02,
 
-        [BackColor("Green")]
+        [SetColor("Green")]
         lblV90 = 0x04,
 
-        [BackColor("Green")]
+        [SetColor("Green")]
         lblVBak = 0x08,
 
-        [BackColor("Red")]
+        [SetColor("Red")]
         lblW10 = 0x10,
 
-        [BackColor("Orange")]
+        [SetColor("Orange")]
         lblW50 = 0x20,
 
-        [BackColor("Green")]
+        [SetColor("Green")]
         lblW90 = 0x40,
 
-        [BackColor("Green")]
+        [SetColor("Green")]
         lblWbak = 0x80,
     }
 
@@ -58,17 +58,17 @@ namespace color_flags
                     {
                         if (((LabelName)data).HasFlag(name))
                         {
-                            if(
+                            if (
                                 typeof(LabelName)
                                 .GetMember($"{name}")
                                 .FirstOrDefault()?
-                                .GetCustomAttribute(typeof(BackColorAttribute))
+                                .GetCustomAttribute(typeof(SetColorAttribute))
                                 is
-                                BackColorAttribute attr)
+                                SetColorAttribute attr)
                             {
                                 label.BackColor = attr.Value;
                             }
-                            else label.BackColor = Color.Maroon;
+                            else label.BackColor = Color.Maroon; // Fallback
                         }
                         else label.BackColor = Color.Black;
                     }

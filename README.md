@@ -13,41 +13,41 @@ One approach is that you can map the bits of a byte instantaneously to an `enum`
 [Flags]
 enum LabelName : byte // Casting 'any' byte to this enum instantly maps the bits. 
 {
-    [BackColor("Red")]
+    [SetColor("Red")]
     lblV10 = 0x01,
 
-    [BackColor("Orange")]
+    [SetColor("Orange")]
     lblV50 = 0x02,
 
-    [BackColor("Green")]
+    [SetColor("Green")]
     lblV90 = 0x04,
 
-    [BackColor("Green")]
+    [SetColor("Green")]
     lblVBak = 0x08,
 
-    [BackColor("Red")]
+    [SetColor("Red")]
     lblW10 = 0x10,
 
-    [BackColor("Orange")]
+    [SetColor("Orange")]
     lblW50 = 0x20,
 
-    [BackColor("Green")]
+    [SetColor("Green")]
     lblW90 = 0x40,
 
-    [BackColor("Green")]
+    [SetColor("Green")]
     lblWbak = 0x80,
 }
 ```
 
 ___
-##### BackColor attribute
+##### SetColor attribute
 
-In this case, we've made a simple custom attribute named `BackColor` to easily specify the background color that should be applied to the label when the flag is set. (This is optional.)
+In this case, we've made a simple custom attribute named `SetColor` to easily specify the background color that should be applied to the label when the flag is set. (This is optional.)
 
 ```
-sealed class BackColorAttribute : Attribute
+sealed class SetColorAttribute : Attribute
 {
-    public BackColorAttribute(string color) => Value = Color.FromName(color);
+    public SetColorAttribute(string color) => Value = Color.FromName(color);
     public Color Value { get; }
 }
 ```
@@ -77,9 +77,9 @@ public partial class MainForm : Form
                             typeof(LabelName)
                             .GetMember($"{name}")
                             .FirstOrDefault()?
-                            .GetCustomAttribute(typeof(BackColorAttribute))
+                            .GetCustomAttribute(typeof(SetColorAttribute))
                             is
-                            BackColorAttribute attr)
+                            SetColorAttribute attr)
                         {
                             label.BackColor = attr.Value;
                         }
