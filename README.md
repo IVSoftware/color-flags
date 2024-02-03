@@ -51,6 +51,8 @@ sealed class SetColorAttribute : Attribute
     public Color Value { get; }
 }
 ```
+___
+
 ##### Example
 
 If the enumeration name is _also_ an exact match for the `Label` name on the form, you can use it to retrieve the `Control` using `tableLayoutPanel.Controls[name.ToString()]`. Here's a simple form that brings all the elements together.
