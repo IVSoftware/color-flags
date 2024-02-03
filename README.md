@@ -5,8 +5,11 @@ In your code the call to `serial.ReadExisting()` returns a byte where the bits d
 [![example][1]][1]
 
 ```csharp
+/// <summary>
+/// Usage: LabelName setLabels = (LabelName) byteValue.
+/// </summary>
 [Flags]
-enum LabelName : byte
+enum LabelName : byte // Casting 'any' byte to this enum instantly maps the bits. 
 {
     [BackColor("Red")]
     lblV10 = 0x01,
