@@ -1,6 +1,6 @@
 ## Use enum to map color flags.
 
-One approach is that you can map the bits of a byte instantaneously to an `enum`. Now you have a usable value representing the labels that are set.
+One approach is that you can map the bits of a byte instantaneously to an `enum` that you set up for this purpose. Now you have a usable value representing the labels that are set.
 
 `LabelName flags = (LabelName)serial.ReadExisting()`.
 
