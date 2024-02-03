@@ -40,7 +40,7 @@ enum LabelName : byte // Casting 'any' byte to this enum instantly maps the bits
 ```
 
 ___
-##### SetColor attribute
+##### [SetColor] attribute
 
 In this case, we've made a simple custom attribute named `SetColor` to easily specify the background color that should be applied to the label when the flag is set. (This is optional.)
 
