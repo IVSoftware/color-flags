@@ -1,6 +1,6 @@
 ## Use enum to map color flags.
 
-One approach is that you can map the bits of a byte instantaneously to an enum that you set up for this purpose. Now you have a usable value representing the labels whose bits are set and use the `HasFlag(Enum flag)` method to test whether a particular bit is `true`.
+One approach is that you can map the bits of a byte instantaneously to an enum that you set up for this purpose. Now you have a usable value representing the labels whose bits are set and can use the `HasFlag(Enum flag)` method to test whether a particular bit is `true`.
 
 `LabelName setLabels = (LabelName)serial.ReadExisting()`.
 
