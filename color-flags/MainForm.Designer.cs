@@ -49,14 +49,17 @@
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel.Controls.Add(lblV10, 0, 0);
-            tableLayoutPanel.Controls.Add(lblV50, 1, 0);
-            tableLayoutPanel.Controls.Add(lblV90, 2, 0);
-            tableLayoutPanel.Controls.Add(lblVbak, 3, 0);
-            tableLayoutPanel.Controls.Add(lblWbak, 3, 1);
-            tableLayoutPanel.Controls.Add(lblW90, 2, 1);
-            tableLayoutPanel.Controls.Add(lblW50, 1, 1);
-            tableLayoutPanel.Controls.Add(lblW10, 0, 1);
+
+            tableLayoutPanel.Controls.Add(lblWbak, 0, 0);
+            tableLayoutPanel.Controls.Add(lblW90, 1, 0);
+            tableLayoutPanel.Controls.Add(lblW50, 2, 0);
+            tableLayoutPanel.Controls.Add(lblW10, 3, 0);
+            tableLayoutPanel.Controls.Add(lblVbak, 0, 1);
+            tableLayoutPanel.Controls.Add(lblV90, 1, 1);
+            tableLayoutPanel.Controls.Add(lblV50, 2, 1);
+            tableLayoutPanel.Controls.Add(lblV10, 3, 1);
+
+
             tableLayoutPanel.Location = new Point(30, 28);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.RowCount = 2;

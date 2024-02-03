@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -70,10 +71,13 @@ namespace color_flags
                 }
             };
         }
-
-        private byte MockReadExisting() =>
-            Convert.ToByte(_rando.Next(0x100));
-
-        Random _rando = new Random();
+        bool UseRandom { get; set; } = true;
+        int count = 1;
+        private byte MockReadExisting()
+        {
+            if(UseRandom) return Convert.ToByte(_rando.Next(0x100));
+            else return Convert.ToByte(((count++) % 0xFF));
+        }
+        Random _rando = new Random(2);
     }
 }
