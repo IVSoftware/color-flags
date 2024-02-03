@@ -1,6 +1,8 @@
 ## Use enum to map color flags.
 
-In your code the call to `serial.ReadExisting()` returns a byte where the bits describe whether to use a custom `BackColor` for what might be inferred to be `Label` controls on the form. One approach is to set up an `enum` that can be cast _directly_ as `LabelName flags = (LabelName)serial.ReadExisting()`.
+One approach is that you can map the bits of a byte instantaneously to an `enum`. Now you have a usable value representing the labels that are set.
+
+`LabelName flags = (LabelName)serial.ReadExisting()`.
 
 [![example][1]][1]
 
